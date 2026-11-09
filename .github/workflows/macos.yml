@@ -1,0 +1,101 @@
+﻿name: Build EVADE for macOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - style-hub
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build macOS (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x64
+            runner: macos-26-intel
+          - arch: arm64
+            runner: macos-26
+
+    steps:
+      - name: Download EVADE source
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build EVADE
+        run: |
+          pnpm buildStandalone
+          node scripts/build/buildDesktopApp.mjs
+
+      - name: Package EVADE as a Mac application
+        shell: bash
+        run: |
+          set -e
+
+          APP_SOURCE="dist/EVADE-darwin-${{ matrix.arch }}/Electron.app"
+          ICONSET="dist/EVADE.iconset"
+
+          mkdir -p "$ICONSET"
+
+          sips -z 16 16 assets/evade-logo.png --out "$ICONSET/icon_16x16.png"
+          sips -z 32 32 assets/evade-logo.png --out "$ICONSET/icon_16x16@2x.png"
+          sips -z 32 32 assets/evade-logo.png --out "$ICONSET/icon_32x32.png"
+          sips -z 64 64 assets/evade-logo.png --out "$ICONSET/icon_32x32@2x.png"
+          sips -z 128 128 assets/evade-logo.png --out "$ICONSET/icon_128x128.png"
+          sips -z 256 256 assets/evade-logo.png --out "$ICONSET/icon_128x128@2x.png"
+          sips -z 256 256 assets/evade-logo.png --out "$ICONSET/icon_256x256.png"
+          sips -z 512 512 assets/evade-logo.png --out "$ICONSET/icon_256x256@2x.png"
+          sips -z 512 512 assets/evade-logo.png --out "$ICONSET/icon_512x512.png"
+          sips -z 1024 1024 assets/evade-logo.png --out "$ICONSET/icon_512x512@2x.png"
+
+          iconutil -c icns "$ICONSET" -o "$APP_SOURCE/Contents/Resources/EVADE.icns"
+
+          PLIST="$APP_SOURCE/Contents/Info.plist"
+
+          set_plist() {
+            KEY="$1"
+            VALUE="$2"
+            /usr/libexec/PlistBuddy -c "Set :$KEY $VALUE" "$PLIST" 2>/dev/null ||
+              /usr/libexec/PlistBuddy -c "Add :$KEY string $VALUE" "$PLIST"
+          }
+
+          set_plist CFBundleName EVADE
+          set_plist CFBundleDisplayName EVADE
+          set_plist CFBundleIdentifier com.evade.desktop
+          set_plist CFBundleIconFile EVADE.icns
+
+          APP_BUNDLE="dist/EVADE-darwin-${{ matrix.arch }}/EVADE.app"
+          mv "$APP_SOURCE" "$APP_BUNDLE"
+
+          hdiutil create \
+            -volname "EVADE" \
+            -srcfolder "$APP_BUNDLE" \
+            -ov \
+            -format UDZO \
+            "dist/EVADE-macOS-${{ matrix.arch }}.dmg"
+
+      - name: Upload Mac installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: EVADE-macOS-${{ matrix.arch }}
+          path: dist/EVADE-macOS-${{ matrix.arch }}.dmg
+          if-no-files-found: error
