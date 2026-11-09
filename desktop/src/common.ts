@@ -1,5 +1,5 @@
 /*
- * Endcord, a Discord client mod
+ * Evade, a Discord client mod
  * Copyright (c) 2026 rootpoii and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -10,13 +10,13 @@ import { type IpcMainEvent, type IpcMainInvokeEvent, shell } from "electron";
 import { join } from "path";
 
 export const DISCORD_URL = "https://discord.com/app";
-export const APP_ID = "com.endcord.desktop";
-// Endcord's night blue, so the window never flashes white while Discord loads
+export const APP_ID = "com.evade.desktop";
+// Evade's night blue, so the window never flashes white while Discord loads
 export const BACKGROUND = "#10182a";
 // Plain Discord web, no Endcord: for comparing the two
 export const VANILLA = process.argv.includes("--vanilla");
-/** A test or second profile (ENDCORD_DESKTOP_DATA_DIR): nothing outside its folder changes, no shortcut, no autostart */
-export const TEST_PROFILE = !!process.env.ENDCORD_DESKTOP_DATA_DIR;
+/** A test or second profile (Evade_DESKTOP_DATA_DIR): nothing outside its folder changes, no shortcut, no autostart */
+export const TEST_PROFILE = !!process.env.Evade_DESKTOP_DATA_DIR;
 
 const ICON_FILE = ({ win32: "icon.ico", linux: "icon.png" } as Record<string, string>)[process.platform];
 export const ICON = ICON_FILE && join(__dirname, ICON_FILE);

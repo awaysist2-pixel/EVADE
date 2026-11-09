@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Endcord, a Discord client mod
  * Copyright (c) 2026 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
@@ -58,11 +58,11 @@ function MemorySection() {
             <HeadingSecondary>{t("Memory")}</HeadingSecondary>
             <div className={cl("tiles")}>
                 <div className={cl("tile")}>
-                    <span className={cl("value")}>{stats ? `${stats.usedMb} MB` : "…"}</span>
+                    <span className={cl("value")}>{stats ? `${stats.usedMb} MB` : "â€¦"}</span>
                     <span className={cl("label")}>{t("Used by Discord right now")}</span>
                 </div>
                 <div className={cl("tile")}>
-                    <span className={cl("value")}>{stats ? `${stats.freedMb} MB` : "…"}</span>
+                    <span className={cl("value")}>{stats ? `${stats.freedMb} MB` : "â€¦"}</span>
                     <span className={cl("label")}>{t("Given back this session, measured after each cleanup")}</span>
                 </div>
             </div>
@@ -135,7 +135,7 @@ function PluginHealth() {
                 ? (
                     <>
                         <Paragraph className={Margins.bottom8}>
-                            {t("Discord changed code these plugins rely on, so part of what they do may not work until Endcord updates them. Everything else they do keeps working.")}
+                            {t("Discord changed code these plugins rely on, so part of what they do may not work until EVADE updates them. Everything else they do keeps working.")}
                         </Paragraph>
                         <div className={cl("table")}>
                             {broken.map(name => (
@@ -168,8 +168,8 @@ function SafeModeSection() {
             <HeadingSecondary>{t("Safe mode")}</HeadingSecondary>
             <Paragraph className={Margins.bottom8}>
                 {IS_SAFE_MODE
-                    ? t("Discord is running in safe mode right now: Endcord's plugins, themes and Custom CSS are off. Restart to bring them back.")
-                    : t("Starts Discord once with Endcord's plugins, themes and Custom CSS off, to see whether one of them causes a problem. Endcord does this by itself when Discord fails to start three times in a row.")}
+                    ? t("Discord is running in safe mode right now: EVADE's plugins, themes and Custom CSS are off. Restart to bring them back.")
+                    : t("Starts Discord once with EVADE's plugins, themes and Custom CSS off, to see whether one of them causes a problem. EVADE does this by itself when Discord fails to start three times in a row.")}
             </Paragraph>
             <Button variant="secondary" onClick={IS_SAFE_MODE ? relaunch : restartInSafeMode}>
                 {IS_SAFE_MODE ? t("Restart normally") : t("Restart in safe mode")}
@@ -208,3 +208,6 @@ function Diagnostics() {
 }
 
 export default wrapTab(Diagnostics, "Diagnostics");
+
+
+

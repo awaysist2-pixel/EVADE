@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Endcord, a Discord client mod
  * Copyright (c) 2026 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
@@ -31,17 +31,17 @@ function describe(trust: UpdateTrust | null, t: ReturnType<typeof useI18n>["t"])
         {
             label: t("Release signature"),
             ...!checked
-                ? { level: "waiting", detail: t("Checked the next time Endcord can reach the update server.") }
+                ? { level: "waiting", detail: t("Checked the next time EVADE can reach the update server.") }
                 : trust.signed
-                    ? { level: "good", detail: t("The current release is signed with Endcord's key. Checked {time}.", { time: moment(trust.checkedAt).fromNow() }) }
-                    : { level: "bad", detail: t("The current release has no valid signature, so Endcord won't install it.") }
+                    ? { level: "good", detail: t("The current release is signed with EVADE's key. Checked {time}.", { time: moment(trust.checkedAt).fromNow() }) }
+                    : { level: "bad", detail: t("The current release has no valid signature, so EVADE won't install it.") }
         },
         {
             label: t("Installed files"),
             ...trust?.installedFiles === "match"
                 ? { level: "good", detail: t("Your files match the signed release exactly.") }
                 : trust?.installedFiles === "changed"
-                    ? { level: "bad", detail: t("Your files differ from the signed release. If you didn't change them, reinstall Endcord.") }
+                    ? { level: "bad", detail: t("Your files differ from the signed release. If you didn't change them, reinstall EVADE.") }
                     : { level: "waiting", detail: t("Compared while you are on the latest release.") }
         },
         {
@@ -96,8 +96,8 @@ export function SecurityStatus() {
                     <div className={cl("always")}>
                         <div className={cl("row-label")}>{t("Built in")}</div>
                         <ul>
-                            <li>{t("Only Discord's own pages can reach Endcord's native features.")}</li>
-                            <li>{t("Links from messages and other people can't make Endcord reach this PC or your local network.")}</li>
+                            <li>{t("Only Discord's own pages can reach EVADE's native features.")}</li>
+                            <li>{t("Links from messages and other people can't make EVADE reach this PC or your local network.")}</li>
                             <li>{t("API keys and passwords in plugin settings stay out of backups and cloud sync.")}</li>
                         </ul>
                     </div>
@@ -106,3 +106,6 @@ export function SecurityStatus() {
         </section>
     );
 }
+
+
+

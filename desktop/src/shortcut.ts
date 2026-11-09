@@ -12,7 +12,7 @@ import { join } from "path";
 
 import { APP_ID, ICON, TEST_PROFILE } from "./common";
 
-export const startMenuShortcut = () => join(app.getPath("appData"), "Microsoft", "Windows", "Start Menu", "Programs", "Endcord Desktop.lnk");
+export const startMenuShortcut = () => join(app.getPath("appData"), "Microsoft", "Windows", "Start Menu", "Programs", "EVADE.lnk");
 
 export function ensureStartMenuShortcut() {
     if (process.platform !== "win32" || TEST_PROFILE || !app.isPackaged) return;
@@ -24,7 +24,7 @@ export function ensureStartMenuShortcut() {
     shell.writeShortcutLink(link, {
         target: process.execPath,
         appUserModelId: APP_ID,
-        description: "Endcord",
+        description: "EVADE",
         icon: ICON,
         iconIndex: 0
     });

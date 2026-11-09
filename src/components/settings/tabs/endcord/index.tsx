@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Endcord, a Discord client mod
  * Copyright (c) 2022 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
@@ -48,18 +48,18 @@ function Switches() {
         },
         {
             key: "uiSounds",
-            title: t("Play quiet sounds in Endcord's settings"),
+            title: t("Play quiet sounds in EVADE's settings"),
             description: t("A soft click on switches, and a tone when something succeeds or fails"),
         },
         {
             key: "pixelStyle",
             title: t("Pixel style"),
-            description: t("Pixel corners, icons and lettering in Endcord's screens, like the installer"),
+            description: t("Pixel corners, icons and lettering in EVADE's screens, like the installer"),
         },
         {
             key: "hideContributorBadge",
-            title: t("Hide the Endcord badges"),
-            description: t("Leaves the developer and contributor badges off every profile on this PC. Other people who use Endcord still see them"),
+            title: t("Hide the developer badges"),
+            description: t("Leaves the developer and contributor badges off every profile on this PC. Other people who use EVADE still see them"),
         },
         !IS_WEB && {
             key: "enableReactDevtools",
@@ -101,7 +101,7 @@ function Switches() {
         !IS_WEB && {
             key: "disableBackgroundMemoryTrim",
             title: t("Keep caches while Discord is minimized or in the tray"),
-            description: t("By default Endcord frees cached memory a minute after the window is hidden"),
+            description: t("By default EVADE frees cached memory a minute after the window is hidden"),
             restartRequired: true
         },
     ] satisfies Array<false | {
@@ -153,7 +153,7 @@ function LanguageSection() {
         <section className={Margins.bottom20}>
             <Forms.FormTitle tag="h5">{t("Language")}</Forms.FormTitle>
             <Forms.FormText className={Margins.bottom8} style={{ color: "var(--text-muted)" }}>
-                {t("Select the language for Endcord and Discord.")}
+                {t("Select the language for EVADE and Discord.")}
             </Forms.FormText>
             <Select
                 options={SUPPORTED_LANGUAGES.map(l => ({
@@ -212,8 +212,8 @@ function EndcordSettings() {
                 <SpecialCard
                     accent="bamboo"
                     title={t("Contributions")}
-                    subtitle={t("Thank you for building Endcord")}
-                    description={t("Your work ships to everyone who uses Endcord, and your profile carries the Endcord Contributor badge.")}
+                    subtitle={t("Thank you for building EVADE")}
+                    description={t("Your work ships to everyone who uses EVADE, and your profile carries the EVADE Contributor badge.")}
                     art={<PixelArt rows={PANDA_ROWS} palette={PANDA_PALETTE} pixel={4} />}
                     actions={
                         <button className="ec-card-button ec-card-button-primary" onClick={() => openContributorModal(user)}>
@@ -225,9 +225,9 @@ function EndcordSettings() {
 
             <SpecialCard
                 accent="honey"
-                title={t("Support Endcord")}
+                title={t("Support EVADE")}
                 subtitle={t("Free and open source, always")}
-                description={t("Endcord is built in our spare time. If it makes Discord better for you, a donation helps us keep testing, translating and shipping new features.")}
+                description={t("EVADE is built in our spare time. If it makes Discord better for you, a donation helps us keep testing, translating and shipping new features.")}
                 art={<span className="ec-card-heart" onClick={event => floatHearts(event.currentTarget)}><PixelArt rows={HEART_ROWS} palette={HEART_PALETTE} pixel={7} /></span>}
                 actions={
                     <>
@@ -261,7 +261,7 @@ function EndcordSettings() {
                         <>
                             <QuickAction
                                 Icon={RestartPixelIcon}
-                                text={t("Relaunch Discord")}
+                                text={t("Relaunch EVADE")}
                                 action={relaunch}
                             />
                             <QuickAction
@@ -305,4 +305,6 @@ function EndcordSettings() {
     );
 }
 
-export default wrapTab(EndcordSettings, "Endcord Settings");
+export default wrapTab(EndcordSettings, "EVADE Settings");
+
+

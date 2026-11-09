@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Endcord, a Discord client mod
  * Copyright (c) 2022 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
@@ -68,7 +68,7 @@ export const _handleCommand = function (cmd: EndcordCommand, args: CommandArgume
         sendBotMessage(ctx.channel.id, {
             content: `${msg}:\n${makeCodeblock(reason)}`,
             author: {
-                username: "Endcord"
+                username: "EVADE"
             }
         });
     };
@@ -169,3 +169,5 @@ export function unregisterCommand(name: string) {
 
     return true;
 }
+
+

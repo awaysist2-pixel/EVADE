@@ -28,13 +28,13 @@ import { collectAfterLoads } from "./trim";
 // while a DNS lookup of the first waits out a dropped connection: 16 MB less for the whole session
 process.env.UV_THREADPOOL_SIZE ??= "2";
 
-// A data folder of its own when asked (tests, a second profile). Has to happen before anything reads userData
+// A data folder of its own when asked (tests, a second profile).
 if (process.env.ENDCORD_DESKTOP_DATA_DIR) app.setPath("userData", process.env.ENDCORD_DESKTOP_DATA_DIR);
 const USER_DATA = app.getPath("userData");
 
 // Endcord's settings and themes live in this app's own folder, not the mod's: both can run at once, and two programs
 // writing one settings file would undo each other's changes. A first start copies the mod's settings over, once
-process.env.ENDCORD_USER_DATA_DIR ??= join(USER_DATA, "Endcord");
+process.env.ENDCORD_USER_DATA_DIR ??= join(USER_DATA, "EVADE");
 importModSettings(process.env.ENDCORD_USER_DATA_DIR);
 
 // The app starts at the end of this file, once everything it uses is defined

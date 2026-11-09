@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Endcord, a Discord client mod
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
@@ -20,7 +20,7 @@ export function NotificationSection() {
         <section className={Margins.top16}>
             <Forms.FormTitle tag="h5">{t("Notifications")}</Forms.FormTitle>
             <Forms.FormText className={Margins.bottom8}>
-                {t("Settings for Notifications sent by Endcord. This does NOT include Discord notifications (messages, etc)")}
+                {t("Settings for Notifications sent by EVADE. This does NOT include Discord notifications (messages, etc)")}
             </Forms.FormText>
             <Flex>
                 <Button onClick={openNotificationSettingsModal}>
@@ -62,7 +62,7 @@ function NotificationSettings() {
             <Forms.FormText className={Margins.bottom8}>
                 {t("Some plugins may show you notifications. These come in two styles:")}
                 <ul>
-                    <li><strong>{t("Endcord Notifications")}</strong>: {t("These are in-app notifications")}</li>
+                    <li><strong>{t("EVADE Notifications")}</strong>: {t("These are in-app notifications")}</li>
                     <li><strong>{t("Desktop Notifications")}</strong>: {t("Native Desktop notifications (like when you get a ping)")}</li>
                 </ul>
             </Forms.FormText>
@@ -71,7 +71,7 @@ function NotificationSettings() {
                 options={[
                     { label: t("Only use Desktop notifications when Discord is not focused"), value: "not-focused", default: true },
                     { label: t("Always use Desktop notifications"), value: "always" },
-                    { label: t("Always use Endcord notifications"), value: "never" },
+                    { label: t("Always use EVADE notifications"), value: "never" },
                 ] satisfies Array<{ value: typeof settings["useNative"]; } & Record<string, any>>}
                 closeOnSelect={true}
                 select={v => settings.useNative = v}
@@ -108,7 +108,7 @@ function NotificationSettings() {
 
             <Forms.FormTitle tag="h5" className={`${Margins.top16} ${Margins.bottom8}`}>{t("Notification Log Limit")}</Forms.FormTitle>
             <Forms.FormText className={Margins.bottom16}>
-                {t("The amount of notifications to save in the log until old ones are removed. Set to 0 to disable Notification log and ∞ to never automatically remove old Notifications")}
+                {t("The amount of notifications to save in the log until old ones are removed. Set to 0 to disable Notification log and âˆž to never automatically remove old Notifications")}
             </Forms.FormText>
             <Slider
                 markers={[0, 25, 50, 75, 100, 200]}
@@ -117,9 +117,12 @@ function NotificationSettings() {
                 stickToMarkers={true}
                 initialValue={settings.logLimit}
                 onValueChange={v => settings.logLimit = v}
-                onValueRender={v => v === 200 ? "∞" : v}
-                onMarkerRender={v => v === 200 ? "∞" : v}
+                onValueRender={v => v === 200 ? "âˆž" : v}
+                onMarkerRender={v => v === 200 ? "âˆž" : v}
             />
         </>
     );
 }
+
+
+

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Endcord, a Discord client mod
  * Copyright (c) 2026 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
@@ -41,10 +41,10 @@ function SafeModeModal({ onClose, transitionState }: RenderModalProps) {
             transitionState={transitionState}
             onClose={onClose}
             size="md"
-            title={t("Endcord started in safe mode")}
+            title={t("EVADE started in safe mode")}
             subtitle={bootState.reason === "manual"
-                ? t("As you asked, Endcord started with its plugins, themes and Custom CSS off. Nothing was changed: everything comes back when you restart.")
-                : t("Discord didn't finish starting {count} times in a row, so this time Endcord started with its plugins, themes and Custom CSS off. Nothing was changed.", { count: bootState.failedStarts })}
+                ? t("As you asked, EVADE started with its plugins, themes and Custom CSS off. Nothing was changed: everything comes back when you restart.")
+                : t("Discord didn't finish starting {count} times in a row, so this time EVADE started with its plugins, themes and Custom CSS off. Nothing was changed.", { count: bootState.failedStarts })}
             actions={bootState.reason === "manual" || !candidates.length
                 ? [
                     { text: t("Stay in safe mode"), variant: "secondary", onClick: onClose },
@@ -75,7 +75,7 @@ function SafeModeModal({ onClose, transitionState }: RenderModalProps) {
                 )
                 : (
                     <p className={cl("hint")}>
-                        {t("Endcord couldn't tell which plugin it was. Turn off the ones you added most recently in the Plugins tab, then restart.")}
+                        {t("EVADE couldn't tell which plugin it was. Turn off the ones you added most recently in the Plugins tab, then restart.")}
                     </p>
                 )
             )}
@@ -85,6 +85,8 @@ function SafeModeModal({ onClose, transitionState }: RenderModalProps) {
 
 /** Says what happened and offers the way out. Runs once Discord's screen is up */
 export function showSafeModeScreen() {
-    showNotice(t("Safe mode: Endcord's plugins, themes and Custom CSS are off until you restart."), t("Restart normally"), relaunch);
+    showNotice(t("Safe mode: EVADE's plugins, themes and Custom CSS are off until you restart."), t("Restart normally"), relaunch);
     openModal(props => <SafeModeModal {...props} />);
 }
+
+

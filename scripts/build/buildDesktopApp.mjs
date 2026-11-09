@@ -74,7 +74,7 @@ const electronZip = await cached(
     ELECTRON_SHA256[target]
 );
 
-const folderName = `EndcordDesktop-${target}`;
+const folderName = `EVADE-${target}`;
 const out = join(DIST, folderName);
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
@@ -85,7 +85,7 @@ else execFileSync("unzip", ["-q", electronZip, "-d", out]);
 // 2. Electron's folder as Endcord Desktop's
 const resources = process.platform === "darwin" ? join(out, "Electron.app", "Contents", "Resources") : join(out, "resources");
 rmSync(join(resources, "default_app.asar"), { force: true });
-const exe = process.platform === "win32" ? join(out, "EndcordDesktop.exe") : join(out, "endcord-desktop");
+const exe = process.platform === "win32" ? join(out, "EVADE.exe") : join(out, "evade");
 if (process.platform === "win32") renameSync(join(out, "electron.exe"), exe);
 else if (process.platform === "linux") renameSync(join(out, "electron"), exe);
 
@@ -104,13 +104,13 @@ if (process.platform === "win32") {
         RCEDIT.sha256
     );
     const strings = {
-        FileDescription: "Endcord",
-        ProductName: "Endcord Desktop",
-        CompanyName: "Endcord",
-        LegalCopyright: "Endcord: GPL-3.0-or-later. Electron: MIT",
-        OriginalFilename: "EndcordDesktop.exe",
-        InternalName: "EndcordDesktop"
-    };
+    FileDescription: "EVADE",
+    ProductName: "EVADE",
+    CompanyName: "EVADE",
+    LegalCopyright: "EVADE: GPL-3.0-or-later. Electron: MIT",
+    OriginalFilename: "EVADE.exe",
+    InternalName: "EVADE"
+};    
     execFileSync(rcedit, [
         exe,
         "--set-icon", join(ROOT, "assets", "app_icon.ico"),
@@ -124,7 +124,8 @@ if (process.platform === "win32") {
 // the updater replaces files in it
 const app = join(resources, "app");
 mkdirSync(app, { recursive: true });
-writeFileSync(join(app, "package.json"), JSON.stringify({ name: "endcord-desktop", productName: "Endcord Desktop", version: VERSION, main: "main.js", license: "GPL-3.0-or-later" }, null, 4));
+writeFileSync(join(app, "package.json"), JSON.stringify({ name: "evade", productName: "EVADE", version: VERSION, main: "main.js", license: "GPL-3.0-or-later" }, null, 4));
+writeFileSync(join(app, "package.json"), JSON.stringify({ name: "evade", productName: "EVADE", version: VERSION, main: "main.js", license: "GPL-3.0-or-later" }, null, 4));
 
 await Promise.all(["main", "preload"].map(name => esbuild.build({
     entryPoints: [join(ROOT, "desktop", "src", `${name}.ts`)],
